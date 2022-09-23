@@ -60,30 +60,37 @@ final class DiceRoll {
         final double randomNumber = (int) (Math.random() * MAX + MIN);
         double counter = 1;
 
-        // This is where you the program recives inputs.
+        // This is the loop that will run till a break occurs, either
+        // when you guess the right number or when the user inputs
+        // a string that is invalid.
         while (true) {
             // try and catch for invalid or valid inputs.
             try {
+                // This is where the user makes their inputs.
                 final Scanner firstInput = new Scanner(System.in);
                 System.out.print("Enter your number (min: 1) (max: 6) ");
                 final double userInput = firstInput.nextDouble();
 
                 // goes through ifs to see if the input equals any
                 // of these scenarios.
-                if (userInput == randomNumber) {
-                    System.out.println("You Guessed Correct!");
-                    System.out.println("This was your " + counter
-                                    + SENTENCE2);
-                    break;
-                } else if (userInput < randomNumber) {
-                    System.out.println("You Guessed To Low!");
-                    System.out.println(SENTENCE1 + counter + SENTENCE2);
-                } else if (userInput > randomNumber) {
-                    System.out.println("You Guessed To High!");
-                    System.out.println(SENTENCE1 + counter + SENTENCE2);
+                if (userInput > MAX || userInput < MIN) {
+                    System.out.println("Invalid Number!");
+                } else {
+                    if (userInput == randomNumber) {
+                        System.out.println("You Guessed Correct!");
+                        System.out.println("This was your " + counter
+                                        + SENTENCE2);
+                        break;
+                    } else if (userInput < randomNumber) {
+                        System.out.println("You Guessed To Low!");
+                        System.out.println(SENTENCE1 + counter + SENTENCE2);
+                    } else if (userInput > randomNumber) {
+                        System.out.println("You Guessed To High!");
+                        System.out.println(SENTENCE1 + counter + SENTENCE2);
+                    }
+                    counter = counter + 1;
                 }
-                counter = counter + 1;
-            // this catches invalid inputs.
+                // This catches invalid inputs.
             } catch (java.util.InputMismatchException ex) {
                 System.out.println("Invalid Input!");
                 break;
